@@ -20,13 +20,19 @@ import org.hibernate.annotations.UpdateTimestamp;
  * code for these basic properties. This annotation is supported by
  * Hibernate framework.
  * 
+ * It defines a common 'id' attribute that is the Primary key for all 
+ * entities which is overridden using @AttributeOverride annotation.
+ * We need to override because different column names are needed when
+ * creating relationships between entities (for ex, look at Role entity) 
+ * 
  * @author sburnwal
  */
 @MappedSuperclass
 public class BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id @GeneratedValue(strategy = GenerationType.SEQUENCE) @Column(name = "id", nullable = false)
+	@Id @GeneratedValue(strategy = GenerationType.SEQUENCE) 
+	@Column(name = "id", nullable = false)
 	private long id;
 	
 	@UpdateTimestamp @Column(name = "update_timestamp", nullable = false)

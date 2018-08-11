@@ -1,16 +1,22 @@
 package demo.rbacapp.entity;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * Entity with JPA annotations. Hibernate provides the JPA implementation.
+ * It overrides the 'id' attribute from the mappedsuperclass BaseEntity.
  * @author sburnwal
  */
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@AttributeOverride(name = "id", column = @Column(name="endpoint_id"))
 public class Endpoint extends BaseEntity {
 	private static final long serialVersionUID = 1234567892L;
 
@@ -29,7 +35,6 @@ public class Endpoint extends BaseEntity {
 	public Endpoint() {
 		//default constructor
 	}
-
 
 	public String getMake() {
 		return make;

@@ -1,15 +1,21 @@
 package demo.rbacapp.entity;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity @Table(name = "APPUSER")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@AttributeOverride(name = "id", column = @Column(name="user_id"))
 public class User extends BaseEntity {
 	private static final long serialVersionUID = 1234567890L;
+	
 	
 	@Column(name = "username")
 	private String username;

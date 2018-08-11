@@ -6,7 +6,14 @@ public class NetworkDeviceDTO extends BaseDTO {
 	private String make;
 	private String model;
 	private String version;
+	private String type;
 	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	public String getMake() {
 		return make;
 	}
@@ -34,6 +41,7 @@ public class NetworkDeviceDTO extends BaseDTO {
 			dto.setMake(device.getMake());
 			dto.setModel(device.getModel());
 			dto.setVersion(device.getVersion());
+			dto.setType(device.getType());
 		}
 		
 		return dto;
