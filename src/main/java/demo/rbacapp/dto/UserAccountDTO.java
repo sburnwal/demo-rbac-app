@@ -1,8 +1,8 @@
 package demo.rbacapp.dto;
 
-import demo.rbacapp.entity.User;
+import demo.rbacapp.entity.UserAccount;
 
-public class UserDTO extends BaseDTO {
+public class UserAccountDTO extends BaseDTO {
 	private String username;
 	private String firstName;
 	private String lastName;
@@ -49,10 +49,10 @@ public class UserDTO extends BaseDTO {
 		this.gender = gender;
 	}
 
-	public static UserDTO toDto(User user) {
-		UserDTO dto = null;
+	public static UserAccountDTO toDto(UserAccount user) {
+		UserAccountDTO dto = null;
 		if(user != null) {
-			dto = new UserDTO();
+			dto = new UserAccountDTO();
 			dto.setId(user.getId());
 			dto.setUsername(user.getUsername());
 			dto.setFirstName(user.getFirstName());

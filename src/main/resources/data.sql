@@ -1,10 +1,10 @@
-INSERT INTO appuser (user_id, username, first_name, last_name, age, gender, update_timestamp) VALUES (1, 'mkyong', 'Kong', 'My', 25, 'M', '2018-08-06 11:30:00');
-INSERT INTO appuser (user_id, username, first_name, last_name, age, gender, update_timestamp) VALUES (2, 'alex', 'Alex', 'Kahn', 35, 'M', '2018-08-06 11:30:00');
-INSERT INTO appuser (user_id, username, first_name, last_name, age, gender, update_timestamp) VALUES (3, 'joel', 'Joel', 'John', 45, 'M', '2018-08-06 11:30:00');
-INSERT INTO appuser (user_id, username, first_name, last_name, age, gender, update_timestamp) VALUES (4, 'sburnwal', 'Satish', 'Burnwal', 35, 'M', '2018-08-06 11:30:00');
-INSERT INTO appuser (user_id, username, first_name, last_name, age, gender, update_timestamp) VALUES (5, 'jrini', 'Rini', 'Johar', 35, 'F', '2018-08-06 11:30:00');
-INSERT INTO appuser (user_id, username, first_name, last_name, age, gender, update_timestamp) VALUES (6, 'kbazaz', 'Karan', 'Bazaz', 25, 'M', '2018-08-06 11:30:00');
-INSERT INTO appuser (user_id, username, first_name, last_name, age, gender, update_timestamp) VALUES (7, 'geetap', 'Geeta', 'Prasad', 15, 'F', '2018-08-06 11:30:00');
+INSERT INTO USER_ACCOUNT (user_id, username, first_name, last_name, age, gender, update_timestamp) VALUES (1, 'mkyong', 'Kong', 'My', 25, 'M', '2018-08-06 11:30:00');
+INSERT INTO USER_ACCOUNT (user_id, username, first_name, last_name, age, gender, update_timestamp) VALUES (2, 'alex', 'Alex', 'Kahn', 35, 'M', '2018-08-06 11:30:00');
+INSERT INTO USER_ACCOUNT (user_id, username, first_name, last_name, age, gender, update_timestamp) VALUES (3, 'joel', 'Joel', 'John', 45, 'M', '2018-08-06 11:30:00');
+INSERT INTO USER_ACCOUNT (user_id, username, first_name, last_name, age, gender, update_timestamp) VALUES (4, 'sburnwal', 'Satish', 'Burnwal', 35, 'M', '2018-08-06 11:30:00');
+INSERT INTO USER_ACCOUNT (user_id, username, first_name, last_name, age, gender, update_timestamp) VALUES (5, 'jrini', 'Rini', 'Johar', 35, 'F', '2018-08-06 11:30:00');
+INSERT INTO USER_ACCOUNT (user_id, username, first_name, last_name, age, gender, update_timestamp) VALUES (6, 'kbazaz', 'Karan', 'Bazaz', 25, 'M', '2018-08-06 11:30:00');
+INSERT INTO USER_ACCOUNT (user_id, username, first_name, last_name, age, gender, update_timestamp) VALUES (7, 'geetap', 'Geeta', 'Prasad', 15, 'F', '2018-08-06 11:30:00');
 
 INSERT INTO NETWORK_DEVICE (network_device_id, make, model, version, type, update_timestamp) VALUES (1, 'Cisco', 'Nexus7k', '3.02', 'Switch', '2018-08-06 11:30:00');
 INSERT INTO NETWORK_DEVICE (network_device_id, make, model, version, type, update_timestamp) VALUES (2, 'Arista', '7250X', '2017.2.3', 'Switch', '2018-08-06 11:30:00');
@@ -24,19 +24,25 @@ INSERT INTO Endpoint (endpoint_id, make, product_name, os, version, update_times
 INSERT INTO Endpoint (endpoint_id, make, product_name, os, version, update_timestamp) VALUES (7, 'LG', 'G7 ThinQ', 'Android Oreo', '9.2', '2018-08-06 11:30:00');
 INSERT INTO Endpoint (endpoint_id, make, product_name, os, version, update_timestamp) VALUES (8, 'Huwawei', 'Nova 3i', 'Android Kitkat', '8.2', '2018-08-06 11:30:00');
 
-INSERT INTO Role (role_id, name, description, immutable, update_timestamp) VALUES (1, 'Superadmin', 'Can do all operations', true, '2018-08-06 11:30:00');
-INSERT INTO Role (role_id, name, description, immutable, update_timestamp) VALUES (2, 'NetworkDeviceManagement', 'Manages network devices', true, '2018-08-06 11:30:00');
-INSERT INTO Role (role_id, name, description, immutable, update_timestamp) VALUES (3, 'EndpointManagement', 'Manages endpoints', true, '2018-08-06 11:30:00');
-INSERT INTO Role (role_id, name, description, immutable, update_timestamp) VALUES (4, 'UserAccessManagement', 'Manages users and their access', true, '2018-08-06 11:30:00');
+INSERT INTO Role (role_id, name, description, immutable, update_timestamp) VALUES (1, 'Administrator', 'Can do all operations', true, '2018-08-06 11:30:00');
+INSERT INTO Role (role_id, name, description, immutable, update_timestamp) VALUES (2, 'NetworkDeviceManager', 'Manages network devices', true, '2018-08-06 11:30:00');
+INSERT INTO Role (role_id, name, description, immutable, update_timestamp) VALUES (3, 'EndpointManager', 'Manages endpoints', true, '2018-08-06 11:30:00');
+INSERT INTO Role (role_id, name, description, immutable, update_timestamp) VALUES (4, 'UserAccessManager', 'Manages users and their access', true, '2018-08-06 11:30:00');
 
 -- Role bits are like 00000001=1, 00000010=2, 00000100=4, 00001000=8 indicating which bit in on in a long integer. Max 64 priviledges are possible 
-INSERT INTO Priviledge (priviledge_id, name, description, role_bit, immutable, update_timestamp) VALUES (1, 'superadmin', 'Can do all operations', 1, true, '2018-08-06 11:30:00');
-INSERT INTO Priviledge (priviledge_id, name, description, role_bit, immutable, update_timestamp) VALUES (2, 'manage-network-devices', 'Manages network devices', 2, true, '2018-08-06 11:30:00');
-INSERT INTO Priviledge (priviledge_id, name, description, role_bit, immutable, update_timestamp) VALUES (3, 'manage-endpoints', 'Manages endpoints', 4, true, '2018-08-06 11:30:00');
-INSERT INTO Priviledge (priviledge_id, name, description, role_bit, immutable, update_timestamp) VALUES (4, 'manage-user-access', 'Manages users and access', 8, true, '2018-08-06 11:30:00');
+INSERT INTO Priviledge (priviledge_id, priv_name, description, role_bit, immutable, update_timestamp) VALUES (1, 'admin', 'Can do all operations', 1, true, '2018-08-06 11:30:00');
+INSERT INTO Priviledge (priviledge_id, priv_name, description, role_bit, immutable, update_timestamp) VALUES (2, 'manage-network-devices', 'Manages network devices', 2, true, '2018-08-06 11:30:00');
+INSERT INTO Priviledge (priviledge_id, priv_name, description, role_bit, immutable, update_timestamp) VALUES (3, 'manage-endpoints', 'Manages endpoints', 4, true, '2018-08-06 11:30:00');
+INSERT INTO Priviledge (priviledge_id, priv_name, description, role_bit, immutable, update_timestamp) VALUES (4, 'manage-user-access', 'Manages users and access', 8, true, '2018-08-06 11:30:00');
 
 -- Role-Priviledge mappings
 INSERT INTO Role_Priviledge(id, role_id, priviledge_id, immutable, update_timestamp) VALUES (1, 1, 1, true, '2018-08-06 11:30:00'); 
 INSERT INTO Role_Priviledge(id, role_id, priviledge_id, immutable, update_timestamp) VALUES (2, 2, 2, true, '2018-08-06 11:30:00'); 
 INSERT INTO Role_Priviledge(id, role_id, priviledge_id, immutable, update_timestamp) VALUES (3, 3, 3, true, '2018-08-06 11:30:00'); 
-INSERT INTO Role_Priviledge(id, role_id, priviledge_id, immutable, update_timestamp) VALUES (4, 4, 4, true, '2018-08-06 11:30:00'); 
+INSERT INTO Role_Priviledge(id, role_id, priviledge_id, immutable, update_timestamp) VALUES (4, 4, 4, true, '2018-08-06 11:30:00');
+
+-- entity meta information
+INSERT INTO Entity_Meta_Info(entity_id, entity_name, priv_name, immutable, update_timestamp) VALUES (1, 'Endpoint', 'manage-endpoints', true, '2018-08-06 11:30:00'); 
+INSERT INTO Entity_Meta_Info(entity_id, entity_name, priv_name, immutable, update_timestamp) VALUES (2, 'NetworkDevice', 'manage-network-devices', true, '2018-08-06 11:30:00'); 
+INSERT INTO Entity_Meta_Info(entity_id, entity_name, priv_name, immutable, update_timestamp) VALUES (3, 'Role', 'manage-user-access', true, '2018-08-06 11:30:00'); 
+INSERT INTO Entity_Meta_Info(entity_id, entity_name, priv_name, immutable, update_timestamp) VALUES (4, 'Priviledge', 'manage-user-access', true, '2018-08-06 11:30:00'); 

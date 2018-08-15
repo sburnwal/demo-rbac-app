@@ -11,13 +11,20 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+/**
+ * There is ManyToMany relationship between Role and Priviledge. Instead of using @ManyToMany
+ * annotation, @OneToMany annotation is used on both the sides since we need extra columns 
+ * on the join table.
+ * 
+ * @author sburnwal
+ */
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @AttributeOverride(name = "id", column = @Column(name="priviledge_id"))
 public class Priviledge extends BaseEntity{
 	private static final long serialVersionUID = 1234567894L;
 
-	@Column(name = "name")	
+	@Column(name = "priv_name", unique = true)	
 	private String name;
 	
 	@Column(name = "role_bit")	

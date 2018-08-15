@@ -5,7 +5,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +15,10 @@ import demo.rbacapp.entity.BaseEntity;
 
 /**
  * A generic entity controller that can do CRUD operations on Entities
- * generically and thus avoid individual controller for each entity separately
+ * generically and thus avoid individual controller for each entity separately.
+ * 
+ * By default controllers with @RestController uses json as data format for 
+ * request and response messages.
  * 
  * @author sburnwal
  */

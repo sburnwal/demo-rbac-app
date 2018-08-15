@@ -1,8 +1,6 @@
 package demo.rbacapp.entity;
 
 import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.AttributeOverride;
@@ -17,7 +15,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  * Overrides the 'id' attribute so that we can have different column name (role_id)
  * which would be useful in creating the ManyToMany relationship (DB will not allow 
  * two columns with the name 'id').  
- *  
+ * 
+ * There is ManyToMany relationship between Role and Priviledge. Instead of using @ManyToMany
+ * annotation, @OneToMany annotation is used on both the sides since we need extra columns 
+ * on the join table.
+ * 
  * @author sburnwal
  */
 
