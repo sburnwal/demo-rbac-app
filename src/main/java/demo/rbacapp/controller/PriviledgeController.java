@@ -15,7 +15,8 @@ import demo.rbacapp.exception.RbacException;
  * Overriding methods so that CRUD ops are disabled. Only GET is supported.
  * Normally, we do not need to override REST controllers for entities.
  * However, we need to override for few of them like Role, Priviledge 
- * so that their data remains intact.
+ * so that the data remains intact.
+ * 
  * @author sburnwal
  *
  */

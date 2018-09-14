@@ -41,8 +41,8 @@ public class UserAccountDetails implements UserDetails {
 
     public static UserAccountDetails create(UserAccount user) {
         List<GrantedAuthority> authorities 
-        	= user.getRoles().stream().map(role ->
-                new SimpleGrantedAuthority(role.getName())
+        	= user.getUserAccountRoles().stream().map(accountRole ->
+                new SimpleGrantedAuthority(accountRole.getRole().getName())
         	  ).collect(Collectors.toList());
 
         return new UserAccountDetails(
@@ -153,5 +153,10 @@ public class UserAccountDetails implements UserDetails {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+    
+    @Override 
+    public String toString() {
+    	return this.getClass().getName() + "-[" + getUsername() + "]";
     }
 }

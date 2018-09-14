@@ -3,16 +3,10 @@ package demo.rbacapp.entity;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.AttributeOverride;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -22,9 +16,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  * 
  * @author sburnwal
  */
-@Entity @Table(name = "USER_ACCOUNT")
+@Entity(name = "UserAccount") @Table(name = "USER_ACCOUNT")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@AttributeOverride(name = "id", column = @Column(name="user_id"))
 public class UserAccount extends BaseEntity {
 	private static final long serialVersionUID = 1234567890L;
 	
@@ -46,12 +39,19 @@ public class UserAccount extends BaseEntity {
 	@Column(name = "password")
 	private String password;
 	
-	@ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "USERACCOUNT_ROLES",
-    	joinColumns = @JoinColumn(name = "user_id"),
-    	inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
+	@OneToMany(mappedBy = "userAccount", cascade = CascadeType.ALL)
+	private Set<UserAccountRole> userAccountRoles = new HashSet<>();
+
+	public Set<UserAccountRole> getUserAccountRoles() {
+		return userAccountRoles;
+	}
 	
+	public void addRole(Role r) {
+		UserAccountRole ur = new UserAccountRole(this, r);
+		userAccountRoles.add(ur);
+		r.getUserAccountRoles().add(ur);
+	}
+
 	public String getPassword() {
 		return password;
 	}
@@ -99,12 +99,4 @@ public class UserAccount extends BaseEntity {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
 }

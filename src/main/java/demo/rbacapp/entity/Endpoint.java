@@ -1,11 +1,9 @@
 package demo.rbacapp.entity;
 
-import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -14,9 +12,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  * It overrides the 'id' attribute from the mappedsuperclass BaseEntity.
  * @author sburnwal
  */
-@Entity
+@Entity (name = "Endpoint")
+@Table(name = "ENDPOINT", uniqueConstraints = {
+	@UniqueConstraint(columnNames = {"make", "product_name", "version"})
+}) 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@AttributeOverride(name = "id", column = @Column(name="endpoint_id"))
 public class Endpoint extends BaseEntity {
 	private static final long serialVersionUID = 1234567892L;
 

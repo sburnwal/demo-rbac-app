@@ -1,9 +1,12 @@
 package demo.rbacapp.dto;
 
+import java.util.Set;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class RegisterUserRequest {
     @NotBlank @Size(min = 2, max = 40)
@@ -23,6 +26,9 @@ public class RegisterUserRequest {
 
     @NotNull 
     private int age;
+    
+    @NotEmpty
+    private Set<Long> roleIds;
 
     public String getFirstName() {
 		return firstName;
@@ -71,4 +77,12 @@ public class RegisterUserRequest {
     public void setPassword(String password) {
         this.password = password;
     }
+
+	public Set<Long> getRoleIds() {
+		return roleIds;
+	}
+
+	public void setRoleIds(Set<Long> roleIds) {
+		this.roleIds = roleIds;
+	}
 }

@@ -3,7 +3,6 @@ package demo.rbacapp.entity;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.AttributeOverride;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +19,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@AttributeOverride(name = "id", column = @Column(name="priviledge_id"))
 public class Priviledge extends BaseEntity{
 	private static final long serialVersionUID = 1234567894L;
 

@@ -42,15 +42,21 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, 
     			FilterChain filterChain) throws ServletException, IOException {
         try {
-        	logger.debug("Going to validate the JsonWebToken from request");
+        	logger.info("Checking if JsonWebToken is present in request from {}", request.getRemoteAddr());
             String jwt = getJwtFromRequest(request);
 
             if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
-                Long userId = tokenProvider.getUserIdFromJWT(jwt);
-
-                UserDetails userDetails = userDetailsService.loadUserById(userId);
+            	logger.info("JsonWebToken of the request is VALID");
+                String username = tokenProvider.getUserIdFromJWT(jwt);
+                logger.info("Got username from JWT - {}", username);
+                
+                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
                 UsernamePasswordAuthenticationToken authentication 
                 	= new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                
+                userDetails.getAuthorities().forEach(authority -> {
+                	logger.info("Got granted authority {}", authority.getAuthority());
+                });
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);

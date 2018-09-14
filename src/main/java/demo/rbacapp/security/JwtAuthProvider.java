@@ -28,30 +28,32 @@ public class JwtAuthProvider {
     private int jwtExpirationInMs;
 
     public String generateToken(Authentication authentication) {
-
         UserAccountDetails userPrincipal = (UserAccountDetails) authentication.getPrincipal();
+    	logger.info("Generating token for {}", userPrincipal.getUsername());
 
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + jwtExpirationInMs);
 
         return Jwts.builder()
-                .setSubject(Long.toString(userPrincipal.getId()))
+                .setSubject(userPrincipal.getUsername())
                 .setIssuedAt(new Date())
                 .setExpiration(expiryDate)
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }
 
-    public Long getUserIdFromJWT(String token) {
+    public String getUserIdFromJWT(String token) {
+    	logger.info("Extracting username from token {}",token);
         Claims claims = Jwts.parser()
                 .setSigningKey(jwtSecret)
                 .parseClaimsJws(token)
                 .getBody();
 
-        return Long.parseLong(claims.getSubject());
+        return claims.getSubject();
     }
 
     public boolean validateToken(String authToken) {
+    	logger.info("Validating token {}", authToken);
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
             return true;

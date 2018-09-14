@@ -1,10 +1,8 @@
 package demo.rbacapp.entity;
 
-import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -20,7 +18,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@AttributeOverride(name = "id", column = @Column(name="entity_id"))
 public class EntityMetaInfo extends BaseEntity {
 	private static final long serialVersionUID = 1234567896L;
 

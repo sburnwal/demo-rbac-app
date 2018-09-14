@@ -30,7 +30,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * validation and to perform any role based checks.
  * 
  * JwtAuthenticationEntryPoint is needed to return a 401 unauthorized error to clients trying to access
- * protected resources withour proper authentication and authorization. It implements spring security's
+ * protected resources without proper authentication and authorization. It implements spring security's
  * AuthenticationEntryPoint interface.
  * 
  * JwtAuthenticationFilter is for validating JWT and loading the user priviledges using that token.
@@ -41,7 +41,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * AuthenticationManagerBuilder is used to create an AuthenticationManager instance which is the main 
  * Spring Security interface for authenticating a user. You can use AuthenticationManagerBuilder to 
  * do other types of authentications like LDAP authentication or add your custom authentication provider. 
- * In our example, we’ve provided our customUserDetailsService and a passwordEncoder to build the 
+ * In our example, we’ve provided our demoUserDetailsService and a passwordEncoder to build the 
  * AuthenticationManager.
  * 
  * @author sburnwal
@@ -77,20 +77,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder(10);
     }
 
     /**
-     * Allow unauthenticated access to static files and login URL 
-     * but restrict access to all other URLs. 
+     * 1. Allow unauthenticated access to static files and login URL and H2 db
+     * 2. Allow unauthenticated access to login URL and login page and allow to do form login
+     * 3. Restrict access to all other URLs.
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
         .authorizeRequests()
-        	.antMatchers("/**/*.png", "/**/*.jpg", "/**/*.html", "/**/*.css", "/**/*.js").permitAll()
-            .antMatchers("/api/auth/**").permitAll()
+        	.antMatchers("/**/*.png", "/**/*.jpg", "/**/*.ico", "/**/*.html", "/**/*.css", "/**/*.js").permitAll()
+            .antMatchers("/h2/**").permitAll()
+            .antMatchers("/api/auth/login", "/api/auth/signup").permitAll()
             .anyRequest().authenticated()
+        .and().formLogin().loginPage("/jsp/loginForm.jsp").permitAll()
         .and().exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
         .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 

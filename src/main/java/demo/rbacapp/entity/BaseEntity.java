@@ -33,17 +33,17 @@ public class BaseEntity implements Serializable {
 
 	@Id @GeneratedValue(strategy = GenerationType.SEQUENCE) 
 	@Column(name = "id", nullable = false)
-	private long id;
+	private Long id;
 	
 	@UpdateTimestamp @Column(name = "update_timestamp", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updateTimestamp;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

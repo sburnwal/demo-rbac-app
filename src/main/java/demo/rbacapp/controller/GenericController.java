@@ -15,7 +15,11 @@ import demo.rbacapp.entity.BaseEntity;
 
 /**
  * A generic entity controller that can do CRUD operations on Entities
- * generically and thus avoid individual controller for each entity separately.
+ * generically and thus avoid implementation for individual controller for 
+ * each entity separately.
+ * 
+ * However, we need to override for few of them like Role, Priviledge 
+ * because roles, privileges are unmodifiable data.
  * 
  * By default controllers with @RestController uses json as data format for 
  * request and response messages.

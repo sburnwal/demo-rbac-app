@@ -1,5 +1,7 @@
 package demo.rbacapp.security;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,7 +23,11 @@ public class DemoUserDetailsService implements UserDetailsService {
     @Autowired 
     UserAccountDao userDao;
 
-    @Override
+    /* Marking this method @Transactional because it loads the UserAccount followed by 
+     * its lazy loading of roles which otherwise would result into org.hibernate.LazyInitializationException: 
+     * failed to lazily initialize a collection of role - could not initialize proxy - no Session
+     */
+    @Override @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserAccount user = userDao.findByUsername(username)
                 .orElseThrow(() -> 

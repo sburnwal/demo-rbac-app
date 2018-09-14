@@ -1,6 +1,5 @@
 package demo.rbacapp.entity;
 
-import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
@@ -12,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@AttributeOverride(name = "id", column = @Column(name="network_device_id"))
 public class NetworkDevice extends BaseEntity {
 	private static final long serialVersionUID = 1234567891L;
 

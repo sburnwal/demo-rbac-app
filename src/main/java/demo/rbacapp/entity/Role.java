@@ -3,11 +3,11 @@ package demo.rbacapp.entity;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.AttributeOverride;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -23,13 +23,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  * @author sburnwal
  */
 
-@Entity
+@Entity(name = "Role") @Table(name = "role")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@AttributeOverride(name = "id", column = @Column(name="role_id"))
 public class Role extends BaseEntity {
 	private static final long serialVersionUID = 1234567893L;
 	
-	@Column(name = "name")
+	@Column(name = "name", unique = true)
 	private String name;
 	
 	@Column(name = "description")
@@ -41,7 +40,10 @@ public class Role extends BaseEntity {
 	
 	@OneToMany(mappedBy = "rolePriviledgePk.role", cascade = CascadeType.ALL)
 	private Set<RolePriviledge> rolePriviledges = new HashSet<>();
-	
+
+	@OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
+	private Set<UserAccountRole> userAccountRoles = new HashSet<>();
+
 	public Set<RolePriviledge> getRolePriviledges() {
 		return rolePriviledges;
 	}
@@ -52,6 +54,18 @@ public class Role extends BaseEntity {
 
 	public void addRolePriviledges(RolePriviledge rolePriviledge) {
 		this.rolePriviledges.add(rolePriviledge);
+	}
+
+	public Set<UserAccountRole> getUserAccountRoles() {
+		return userAccountRoles;
+	}
+
+	public void setUserAccountRoles(Set<UserAccountRole> userAccountRoles) {
+		this.userAccountRoles = userAccountRoles;
+	}
+	
+	public void addUserAccountRole(UserAccountRole ur) {
+		this.userAccountRoles.add(ur);
 	}
 
 	public String getName() {
