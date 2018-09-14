@@ -28,7 +28,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import demo.rbacapp.dao.RoleDao;
 import demo.rbacapp.dao.UserAccountDao;
-import demo.rbacapp.dao.UserAccountRoleDao;
 import demo.rbacapp.dto.Credentials;
 import demo.rbacapp.dto.JwtAuthResponse;
 import demo.rbacapp.dto.RegisterUserRequest;

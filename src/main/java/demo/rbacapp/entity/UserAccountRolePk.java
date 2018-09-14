@@ -19,7 +19,7 @@ import javax.persistence.Embeddable;
 /* @Embeddable means instances of this class are part of the entities who own it */ 
 @Embeddable 
 public class UserAccountRolePk implements Serializable {
-	@Column(name = "user_id") 
+	@Column(name = "user_account_id") 
 	private Long userId;
 	
 	@Column(name = "role_id")
